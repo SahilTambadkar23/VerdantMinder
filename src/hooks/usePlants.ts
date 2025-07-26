@@ -25,15 +25,13 @@ export function usePlants() {
     setIsInitialized(true);
   }, []);
 
-  useEffect(() => {
-    if (isInitialized) {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
-      } catch (error) {
-        console.error('Failed to save plants to localStorage:', error);
-      }
+  const persistPlants = (updatedPlants: Plant[]) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedPlants));
+    } catch (error) {
+      console.error('Failed to save plants to localStorage:', error);
     }
-  }, [plants, isInitialized]);
+  };
 
   const addPlant = useCallback((plant: Omit<Plant, 'id' | 'schedule' | 'log'>) => {
     const newPlant: Plant = {
@@ -42,7 +40,13 @@ export function usePlants() {
       schedule: [],
       log: [],
     };
-    setPlants((prevPlants) => [...prevPlants, newPlant]);
+    
+    setPlants((prevPlants) => {
+      const updatedPlants = [...prevPlants, newPlant];
+      persistPlants(updatedPlants);
+      return updatedPlants;
+    });
+
     return newPlant;
   }, []);
   
@@ -51,64 +55,88 @@ export function usePlants() {
   }, [plants]);
 
   const updatePlant = useCallback((updatedPlant: Plant) => {
-    setPlants(prevPlants => prevPlants.map(p => p.id === updatedPlant.id ? { ...updatedPlant } : p));
+    setPlants(prevPlants => {
+      const updatedPlants = prevPlants.map(p => p.id === updatedPlant.id ? { ...updatedPlant } : p);
+      persistPlants(updatedPlants);
+      return updatedPlants;
+    });
   }, []);
 
   const addCareTask = useCallback((plantId: string, task: Omit<CareTask, 'id' | 'lastCompleted'>) => {
     const newId = `task-${new Date().toISOString()}`;
     const newTask: CareTask = { ...task, id: newId, lastCompleted: new Date().toISOString() };
-    setPlants(prevPlants => prevPlants.map(p => p.id === plantId ? { ...p, schedule: [...p.schedule, newTask] } : p));
+    setPlants(prevPlants => {
+      const updatedPlants = prevPlants.map(p => p.id === plantId ? { ...p, schedule: [...p.schedule, newTask] } : p);
+      persistPlants(updatedPlants);
+      return updatedPlants;
+    });
   }, []);
 
   const removeCareTask = useCallback((plantId: string, taskId: string) => {
-    setPlants(prevPlants => prevPlants.map(p => {
-      if (p.id === plantId) {
-        return {
-          ...p,
-          schedule: p.schedule.filter(t => t.id !== taskId)
-        };
-      }
-      return p;
-    }));
+    setPlants(prevPlants => {
+      const updatedPlants = prevPlants.map(p => {
+        if (p.id === plantId) {
+          return {
+            ...p,
+            schedule: p.schedule.filter(t => t.id !== taskId)
+          };
+        }
+        return p;
+      });
+      persistPlants(updatedPlants);
+      return updatedPlants;
+    });
   }, []);
 
   const completeCareTask = useCallback((plantId: string, taskId: string, notes?: string, photoUrl?: string | null) => {
     const date = new Date().toISOString();
     const newLogEntryId = `log-${date}`;
     
-    setPlants(prevPlants => prevPlants.map(p => {
-      if (p.id === plantId) {
-        const taskToComplete = p.schedule.find(t => t.id === taskId);
-        if (!taskToComplete) return p;
+    setPlants(prevPlants => {
+      let updatedPlant: Plant | undefined;
+      const updatedPlants = prevPlants.map(p => {
+        if (p.id === plantId) {
+          const taskToComplete = p.schedule.find(t => t.id === taskId);
+          if (!taskToComplete) return p;
 
-        const newLogEntry: CareLogEntry = {
-          id: newLogEntryId,
-          taskType: taskToComplete.type,
-          date,
-          notes: notes || `Completed '${taskToComplete.type}' task.`,
-          photoUrl: photoUrl || undefined,
-        };
+          const newLogEntry: CareLogEntry = {
+            id: newLogEntryId,
+            taskType: taskToComplete.type,
+            date,
+            notes: notes || `Completed '${taskToComplete.type}' task.`,
+            photoUrl: photoUrl || undefined,
+          };
 
-        const updatedSchedule = p.schedule.map(t => t.id === taskId ? { ...t, lastCompleted: date } : t);
-        
-        // Return a new plant object to ensure re-render
-        return {
-          ...p,
-          schedule: updatedSchedule,
-          log: [newLogEntry, ...p.log],
+          const updatedSchedule = p.schedule.map(t => t.id === taskId ? { ...t, lastCompleted: date } : t);
+          
+          updatedPlant = {
+            ...p,
+            schedule: updatedSchedule,
+            log: [newLogEntry, ...p.log],
+          }
+          return updatedPlant
         }
+        return p;
+      });
+
+      if (updatedPlant) {
+        persistPlants(updatedPlants);
       }
-      return p;
-    }));
+      return updatedPlants;
+    });
   }, []);
 
   const clearCareLog = useCallback((plantId: string) => {
-    setPlants(prevPlants => prevPlants.map(p => {
-      if (p.id === plantId) {
-        return { ...p, log: [] };
-      }
-      return p;
-    }));
+    setPlants(prevPlants => {
+      const updatedPlants = prevPlants.map(p => {
+        if (p.id === plantId) {
+          return { ...p, log: [] };
+        }
+        return p;
+      });
+      persistPlants(updatedPlants);
+      return updatedPlants;
+    });
   }, []);
 
   return { 
