@@ -104,7 +104,7 @@ export default function CareLog({ plant }: CareLogProps) {
                             width={40}
                             height={40}
                             className="rounded-md object-cover cursor-pointer ml-auto"
-                            data-ai-hint="plant"
+                            data-ai-hint={plant.name.toLowerCase().replace(' ', '-')}
                           />
                         </DialogTrigger>
                         <DialogContent className="max-w-md">

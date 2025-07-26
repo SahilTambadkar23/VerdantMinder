@@ -40,7 +40,7 @@ export default function PlantCard({ plant, onRemovePlant }: PlantCardProps) {
                 alt={plant.name}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
-                data-ai-hint="plant"
+                data-ai-hint={plant.name.toLowerCase().replace(' ', '-')}
               />
             </div>
           </CardHeader>

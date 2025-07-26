@@ -73,7 +73,7 @@ export default function PlantDetailPage() {
                 alt={plant.name}
                 fill
                 className="object-cover rounded-t-lg"
-                data-ai-hint="plant"
+                data-ai-hint={plant.name.toLowerCase().replace(' ', '-')}
               />
             </div>
           </CardHeader>
