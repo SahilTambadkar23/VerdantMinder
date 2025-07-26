@@ -5,7 +5,7 @@ export const initialPlants: Plant[] = [
     id: '1',
     name: 'Monstera Deliciosa',
     type: 'Tropical',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?monstera-deliciosa',
     description: 'A large, popular houseplant with iconic split leaves. Likes bright, indirect light and well-draining soil.',
     schedule: [
       { id: 's1-1', type: 'Water', frequencyDays: 7, lastCompleted: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString() },
@@ -19,7 +19,7 @@ export const initialPlants: Plant[] = [
     id: '2',
     name: 'Snake Plant',
     type: 'Succulent',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?snake-plant',
     description: 'Extremely hardy and low-maintenance. Tolerates low light and infrequent watering.',
     schedule: [
       { id: 's2-1', type: 'Water', frequencyDays: 21, lastCompleted: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString() },
@@ -30,7 +30,7 @@ export const initialPlants: Plant[] = [
     id: '3',
     name: 'Fiddle Leaf Fig',
     type: 'Ficus',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?fiddle-leaf-fig',
     description: 'A stylish plant with large, violin-shaped leaves. Can be finicky and requires consistent care.',
     schedule: [
       { id: 's3-1', type: 'Water', frequencyDays: 10, lastCompleted: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() },
@@ -44,7 +44,7 @@ export const initialPlants: Plant[] = [
     id: '4',
     name: 'Pothos',
     type: 'Vine',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?pothos-plant',
     description: 'A forgiving and fast-growing vine, perfect for beginners. Trails beautifully from hanging baskets.',
     schedule: [
       { id: 's4-1', type: 'Water', frequencyDays: 10, lastCompleted: new Date(Date.now() - 11 * 24 * 60 * 60 * 1000).toISOString() },
@@ -55,7 +55,7 @@ export const initialPlants: Plant[] = [
     id: '5',
     name: 'Spider Plant',
     type: 'Air-purifying',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?spider-plant',
     description: 'Known for its arching leaves and ability to produce "pups". Very easy to care for and propagate.',
     schedule: [
       { id: 's5-1', type: 'Water', frequencyDays: 7, lastCompleted: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() }
@@ -68,7 +68,7 @@ export const initialPlants: Plant[] = [
     id: '6',
     name: 'ZZ Plant',
     type: 'Low-light',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?zz-plant',
     description: 'Zamioculcas zamiifolia is drought-tolerant and accepts low-light conditions without fuss.',
     schedule: [
       { id: 's6-1', type: 'Water', frequencyDays: 25, lastCompleted: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString() }
@@ -79,7 +79,7 @@ export const initialPlants: Plant[] = [
     id: '7',
     name: 'Rubber Plant',
     type: 'Ficus',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?rubber-plant',
     description: 'A popular houseplant with dark, glossy leaves. Prefers bright, indirect light and can grow quite tall.',
     schedule: [
       { id: 's7-1', type: 'Water', frequencyDays: 14, lastCompleted: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() },
@@ -93,7 +93,7 @@ export const initialPlants: Plant[] = [
     id: '8',
     name: 'Calathea Orbifolia',
     type: 'Prayer Plant',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?calathea-orbifolia',
     description: 'Beautiful round leaves with silver stripes. Requires high humidity and consistently moist soil.',
     schedule: [
       { id: 's8-1', type: 'Water', frequencyDays: 5, lastCompleted: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString() }
@@ -104,7 +104,7 @@ export const initialPlants: Plant[] = [
     id: '9',
     name: 'Boston Fern',
     type: 'Fern',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?boston-fern',
     description: 'Loves high humidity and indirect light, making it a great bathroom plant. Features feathery, green fronds.',
     schedule: [
       { id: 's9-1', type: 'Water', frequencyDays: 4, lastCompleted: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() }
@@ -117,7 +117,7 @@ export const initialPlants: Plant[] = [
     id: '10',
     name: 'Peace Lily',
     type: 'Flowering',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?peace-lily',
     description: 'Known for its beautiful white spathes and air-purifying qualities. It will droop dramatically when it needs water.',
     schedule: [
       { id: 's10-1', type: 'Water', frequencyDays: 6, lastCompleted: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString() }
@@ -128,7 +128,7 @@ export const initialPlants: Plant[] = [
     id: '11',
     name: 'Succulent Mix',
     type: 'Succulent',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?succulent',
     description: 'A small collection of various succulents in a single pot. Great for sunny windowsills.',
     schedule: [
       { id: 's11-1', type: 'Water', frequencyDays: 20, lastCompleted: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString() }
@@ -139,7 +139,7 @@ export const initialPlants: Plant[] = [
     id: '12',
     name: 'Orchid',
     type: 'Flowering',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?orchid',
     description: 'Elegant flowering plant that can be tricky to care for but rewards with beautiful blooms. Likes specific orchid potting mix.',
     schedule: [
       { id: 's12-1', type: 'Water', frequencyDays: 9, lastCompleted: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString() }
@@ -150,7 +150,7 @@ export const initialPlants: Plant[] = [
     id: '13',
     name: 'Air Plant',
     type: 'Tillandsia',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?air-plant',
     description: 'A unique plant that doesn\'t require soil to grow. It absorbs nutrients and water through its leaves.',
     schedule: [
       { id: 's13-1', type: 'Water', frequencyDays: 10, lastCompleted: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() }
@@ -161,7 +161,7 @@ export const initialPlants: Plant[] = [
     id: '14',
     name: 'Jade Plant',
     type: 'Succulent',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?jade-plant',
     description: 'A popular good-luck plant with fleshy, oval-shaped leaves. It is relatively easy to care for and can live for a long time.',
     schedule: [
       { id: 's14-1', type: 'Water', frequencyDays: 20, lastCompleted: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString() }
@@ -172,7 +172,7 @@ export const initialPlants: Plant[] = [
     id: '15',
     name: 'Areca Palm',
     type: 'Palm',
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://source.unsplash.com/600x600/?areca-palm',
     description: 'A popular and elegant palm with arching fronds. It helps in purifying the air and is relatively easy to grow indoors.',
     schedule: [
       { id: 's15-1', type: 'Water', frequencyDays: 7, lastCompleted: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() }
