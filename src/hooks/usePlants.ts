@@ -12,9 +12,21 @@ export function usePlants() {
 
   useEffect(() => {
     try {
-      const storedPlants = localStorage.getItem(STORAGE_KEY);
-      if (storedPlants) {
-        setPlants(JSON.parse(storedPlants));
+      const storedPlantsJson = localStorage.getItem(STORAGE_KEY);
+      if (storedPlantsJson) {
+        const storedPlants: Plant[] = JSON.parse(storedPlantsJson);
+        const storedPlantIds = new Set(storedPlants.map(p => p.id));
+        
+        // Find any initial plants that are not in storage and add them
+        const newPlantsToAdd = initialPlants.filter(p => !storedPlantIds.has(p.id));
+        
+        if (newPlantsToAdd.length > 0) {
+          const combinedPlants = [...storedPlants, ...newPlantsToAdd];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(combinedPlants));
+          setPlants(combinedPlants);
+        } else {
+          setPlants(storedPlants);
+        }
       } else {
         // First time load, initialize with default data and save it.
         localStorage.setItem(STORAGE_KEY, JSON.stringify(initialPlants));
@@ -22,6 +34,7 @@ export function usePlants() {
       }
     } catch (error) {
       console.error('Failed to load plants from localStorage:', error);
+      // Fallback to initial data if there's an error
       setPlants(initialPlants);
     }
     setIsInitialized(true);
@@ -43,12 +56,12 @@ export function usePlants() {
       log: [],
     };
     
+    let newPlants: Plant[] = [];
     setPlants((prevPlants) => {
-      const updatedPlants = [...prevPlants, newPlant];
-      persistPlants(updatedPlants);
-      return updatedPlants;
+      newPlants = [...prevPlants, newPlant];
+      persistPlants(newPlants);
+      return newPlants
     });
-
     return newPlant;
   }, [persistPlants]);
   
@@ -103,7 +116,6 @@ export function usePlants() {
     const newLogEntryId = `log-${date}`;
     
     setPlants(prevPlants => {
-      let updatedPlant: Plant | undefined;
       const updatedPlants = prevPlants.map(p => {
         if (p.id === plantId) {
           const taskToComplete = p.schedule.find(t => t.id === taskId);
@@ -119,19 +131,16 @@ export function usePlants() {
 
           const updatedSchedule = p.schedule.map(t => t.id === taskId ? { ...t, lastCompleted: date } : t);
           
-          updatedPlant = {
+          const updatedPlant = {
             ...p,
             schedule: updatedSchedule,
             log: [newLogEntry, ...p.log],
           }
-          return { ...updatedPlant }; // Create a new object to ensure re-render
+          return updatedPlant;
         }
         return p;
       });
-
-      if (updatedPlant) {
-        persistPlants(updatedPlants);
-      }
+      persistPlants(updatedPlants);
       return updatedPlants;
     });
   }, [persistPlants]);
