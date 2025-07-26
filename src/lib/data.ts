@@ -99,5 +99,29 @@ export const initialPlants: Plant[] = [
       { id: 's8-1', type: 'Water', frequencyDays: 5, lastCompleted: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString() }
     ],
     log: []
+  },
+  {
+    id: '9',
+    name: 'Boston Fern',
+    type: 'Fern',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'Loves high humidity and indirect light, making it a great bathroom plant. Features feathery, green fronds.',
+    schedule: [
+      { id: 's9-1', type: 'Water', frequencyDays: 4, lastCompleted: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: [
+      { id: 'l9-1', taskType: 'Water', date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), notes: 'Misted leaves as well.' }
+    ]
+  },
+  {
+    id: '10',
+    name: 'Peace Lily',
+    type: 'Flowering',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'Known for its beautiful white spathes and air-purifying qualities. It will droop dramatically when it needs water.',
+    schedule: [
+      { id: 's10-1', type: 'Water', frequencyDays: 6, lastCompleted: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
   }
 ];
