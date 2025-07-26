@@ -16,6 +16,8 @@ export function usePlants() {
       if (storedPlants) {
         setPlants(JSON.parse(storedPlants));
       } else {
+        // First time load, initialize with default data and save it.
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(initialPlants));
         setPlants(initialPlants);
       }
     } catch (error) {
@@ -25,13 +27,13 @@ export function usePlants() {
     setIsInitialized(true);
   }, []);
 
-  const persistPlants = (updatedPlants: Plant[]) => {
+  const persistPlants = useCallback((updatedPlants: Plant[]) => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedPlants));
     } catch (error) {
       console.error('Failed to save plants to localStorage:', error);
     }
-  };
+  }, []);
 
   const addPlant = useCallback((plant: Omit<Plant, 'id' | 'schedule' | 'log'>) => {
     const newPlant: Plant = {
@@ -48,7 +50,7 @@ export function usePlants() {
     });
 
     return newPlant;
-  }, []);
+  }, [persistPlants]);
   
   const getPlantById = useCallback((id: string) => {
     return plants.find(p => p.id === id);
@@ -60,7 +62,7 @@ export function usePlants() {
       persistPlants(updatedPlants);
       return updatedPlants;
     });
-  }, []);
+  }, [persistPlants]);
 
   const addCareTask = useCallback((plantId: string, task: Omit<CareTask, 'id' | 'lastCompleted'>) => {
     const newId = `task-${new Date().toISOString()}`;
@@ -70,7 +72,7 @@ export function usePlants() {
       persistPlants(updatedPlants);
       return updatedPlants;
     });
-  }, []);
+  }, [persistPlants]);
 
   const removeCareTask = useCallback((plantId: string, taskId: string) => {
     setPlants(prevPlants => {
@@ -86,7 +88,7 @@ export function usePlants() {
       persistPlants(updatedPlants);
       return updatedPlants;
     });
-  }, []);
+  }, [persistPlants]);
 
   const completeCareTask = useCallback((plantId: string, taskId: string, notes?: string, photoUrl?: string | null) => {
     const date = new Date().toISOString();
@@ -114,7 +116,7 @@ export function usePlants() {
             schedule: updatedSchedule,
             log: [newLogEntry, ...p.log],
           }
-          return updatedPlant
+          return { ...updatedPlant }; // Create a new object to ensure re-render
         }
         return p;
       });
@@ -124,7 +126,7 @@ export function usePlants() {
       }
       return updatedPlants;
     });
-  }, []);
+  }, [persistPlants]);
 
   const clearCareLog = useCallback((plantId: string) => {
     setPlants(prevPlants => {
@@ -137,7 +139,7 @@ export function usePlants() {
       persistPlants(updatedPlants);
       return updatedPlants;
     });
-  }, []);
+  }, [persistPlants]);
 
   return { 
     plants, 

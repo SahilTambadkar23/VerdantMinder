@@ -99,16 +99,21 @@ export default function AddPlantForm() {
   };
 
   const onSubmit = (data: FormValues) => {
+    // The addPlant function now handles updating state and localStorage.
+    // We can confidently navigate after it returns.
     const newPlant = addPlant({
       name: data.plantName,
       type: data.plantType,
       description: data.plantDescription,
       imageUrl: photoPreview || 'https://placehold.co/600x600.png',
     });
+
     toast({
       title: 'Plant Added!',
       description: `${data.plantName} has been added to your collection.`,
     });
+    
+    // The router push will now happen after the state has been successfully updated.
     router.push(`/plants/${newPlant.id}`);
   };
 
