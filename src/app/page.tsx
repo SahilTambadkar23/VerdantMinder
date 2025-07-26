@@ -5,9 +5,20 @@ import PlantCard from '@/components/PlantCard';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Home() {
-  const { plants, isInitialized } = usePlants();
+  const { plants, removePlant, isInitialized } = usePlants();
+  const { toast } = useToast();
+
+  const handleRemovePlant = (plantId: string, plantName: string) => {
+    removePlant(plantId);
+    toast({
+      title: 'Plant Removed',
+      description: `${plantName} has been removed from your collection.`,
+      variant: 'destructive',
+    });
+  };
 
   if (!isInitialized) {
     return (
@@ -31,7 +42,7 @@ export default function Home() {
       {plants.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {plants.map((plant) => (
-            <PlantCard key={plant.id} plant={plant} />
+            <PlantCard key={plant.id} plant={plant} onRemovePlant={handleRemovePlant} />
           ))}
         </div>
       ) : (
