@@ -1,17 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import type { Plant, CareTask } from '@/lib/types';
+import type { Plant } from '@/lib/types';
 import { usePlants } from '@/hooks/usePlants';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from './ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 import { Input } from './ui/input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Droplets, Leaf, Scissors, PlusCircle, CheckCircle2 } from 'lucide-react';
+import { Droplets, Leaf, Scissors, PlusCircle, CheckCircle2, Trash2 } from 'lucide-react';
 import { cn, isTaskDue } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
@@ -34,7 +45,7 @@ const taskSchema = z.object({
 type TaskFormValues = z.infer<typeof taskSchema>;
 
 export default function CareSchedule({ plant }: CareScheduleProps) {
-  const { addCareTask, completeCareTask } = usePlants();
+  const { addCareTask, completeCareTask, removeCareTask } = usePlants();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
 
@@ -53,6 +64,11 @@ export default function CareSchedule({ plant }: CareScheduleProps) {
   const handleCompleteTask = (taskId: string) => {
     completeCareTask(plant.id, taskId);
     toast({ title: 'Task Completed!', description: `Great job! The task has been added to the care log.` });
+  };
+  
+  const handleRemoveTask = (taskId: string) => {
+    removeCareTask(plant.id, taskId);
+    toast({ title: 'Task Removed', description: 'The task has been removed from the schedule.', variant: 'destructive' });
   };
 
   const sortedSchedule = [...plant.schedule].sort((a, b) => {
@@ -152,10 +168,33 @@ export default function CareSchedule({ plant }: CareScheduleProps) {
                     </p>
                   </div>
                 </div>
-                <Button size="sm" variant="outline" className="gap-2" onClick={() => handleCompleteTask(task.id)}>
-                    <CheckCircle2 className="h-4 w-4"/>
-                    Done
-                </Button>
+                <div className="flex gap-2">
+                    <Button size="sm" variant="outline" className="gap-2" onClick={() => handleCompleteTask(task.id)}>
+                        <CheckCircle2 className="h-4 w-4"/>
+                        Done
+                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button size="icon" variant="destructive-outline">
+                          <Trash2 className="h-4 w-4"/>
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This will permanently delete the "{task.type}" task from your schedule. This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => handleRemoveTask(task.id)}>
+                            Delete
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                </div>
               </div>
             )})
           ) : (

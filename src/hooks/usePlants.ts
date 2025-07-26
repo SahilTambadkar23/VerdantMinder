@@ -60,6 +60,18 @@ export function usePlants() {
     setPlants(prevPlants => prevPlants.map(p => p.id === plantId ? { ...p, schedule: [...p.schedule, newTask] } : p));
   }, []);
 
+  const removeCareTask = useCallback((plantId: string, taskId: string) => {
+    setPlants(prevPlants => prevPlants.map(p => {
+      if (p.id === plantId) {
+        return {
+          ...p,
+          schedule: p.schedule.filter(t => t.id !== taskId)
+        };
+      }
+      return p;
+    }));
+  }, []);
+
   const completeCareTask = useCallback((plantId: string, taskId: string, notes?: string) => {
     const date = new Date().toISOString();
     const newLogEntryId = `log-${date}`;
@@ -89,13 +101,24 @@ export function usePlants() {
     }));
   }, []);
 
+  const clearCareLog = useCallback((plantId: string) => {
+    setPlants(prevPlants => prevPlants.map(p => {
+      if (p.id === plantId) {
+        return { ...p, log: [] };
+      }
+      return p;
+    }));
+  }, []);
+
   return { 
     plants, 
     addPlant, 
     getPlantById, 
     updatePlant, 
-    addCareTask, 
+    addCareTask,
+    removeCareTask,
     completeCareTask,
+    clearCareLog,
     isInitialized 
   };
 }
