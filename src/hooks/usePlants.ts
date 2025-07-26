@@ -74,6 +74,7 @@ export function usePlants() {
           taskType: taskToComplete.type,
           date,
           notes: notes || `Completed '${taskToComplete.type}' task.`,
+          photoUrl: 'https://placehold.co/100x100.png',
         };
 
         const updatedSchedule = p.schedule.map(t => t.id === taskId ? { ...t, lastCompleted: date } : t);

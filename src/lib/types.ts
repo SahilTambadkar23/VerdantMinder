@@ -11,6 +11,7 @@ export interface CareLogEntry {
   taskType: string;
   date: string; // ISO date string
   notes?: string;
+  photoUrl?: string;
 }
 
 export interface Plant {
