@@ -51,4 +51,53 @@ export const initialPlants: Plant[] = [
     ],
     log: [],
   },
+  {
+    id: '5',
+    name: 'Spider Plant',
+    type: 'Air-purifying',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'Known for its arching leaves and ability to produce "pups". Very easy to care for and propagate.',
+    schedule: [
+      { id: 's5-1', type: 'Water', frequencyDays: 7, lastCompleted: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: [
+      { id: 'l5-1', taskType: 'Water', date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), notes: 'Watered thoroughly.' }
+    ]
+  },
+  {
+    id: '6',
+    name: 'ZZ Plant',
+    type: 'Low-light',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'Zamioculcas zamiifolia is drought-tolerant and accepts low-light conditions without fuss.',
+    schedule: [
+      { id: 's6-1', type: 'Water', frequencyDays: 25, lastCompleted: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
+  },
+  {
+    id: '7',
+    name: 'Rubber Plant',
+    type: 'Ficus',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'A popular houseplant with dark, glossy leaves. Prefers bright, indirect light and can grow quite tall.',
+    schedule: [
+      { id: 's7-1', type: 'Water', frequencyDays: 14, lastCompleted: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() },
+      { id: 's7-2', type: 'Fertilize', frequencyDays: 60, lastCompleted: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: [
+      { id: 'l7-1', taskType: 'Water', date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() }
+    ]
+  },
+  {
+    id: '8',
+    name: 'Calathea Orbifolia',
+    type: 'Prayer Plant',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'Beautiful round leaves with silver stripes. Requires high humidity and consistently moist soil.',
+    schedule: [
+      { id: 's8-1', type: 'Water', frequencyDays: 5, lastCompleted: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
+  }
 ];
