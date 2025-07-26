@@ -63,6 +63,14 @@ export function usePlants() {
       return updatedPlants;
     });
   }, [persistPlants]);
+  
+  const removePlant = useCallback((plantId: string) => {
+    setPlants((prevPlants) => {
+      const updatedPlants = prevPlants.filter(p => p.id !== plantId);
+      persistPlants(updatedPlants);
+      return updatedPlants;
+    });
+  }, [persistPlants]);
 
   const addCareTask = useCallback((plantId: string, task: Omit<CareTask, 'id' | 'lastCompleted'>) => {
     const newId = `task-${new Date().toISOString()}`;
@@ -146,6 +154,7 @@ export function usePlants() {
     addPlant, 
     getPlantById, 
     updatePlant, 
+    removePlant,
     addCareTask,
     removeCareTask,
     completeCareTask,
