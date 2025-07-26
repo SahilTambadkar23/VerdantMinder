@@ -12,7 +12,7 @@ export const initialPlants: Plant[] = [
       { id: 's1-2', type: 'Fertilize', frequencyDays: 30, lastCompleted: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString() },
     ],
     log: [
-        { id: 'l1-1', taskType: 'Water', date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), notes: 'Soil was dry to the touch.', photoUrl: 'https://placehold.co/100x100.png' },
+        { id: 'l1-1', taskType: 'Water', date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), notes: 'Soil was dry to the touch.' },
     ],
   },
   {
@@ -37,7 +37,7 @@ export const initialPlants: Plant[] = [
       { id: 's3-2', type: 'Prune', frequencyDays: 90, lastCompleted: new Date(Date.now() - 80 * 24 * 60 * 60 * 1000).toISOString() },
     ],
     log: [
-        { id: 'l3-1', taskType: 'Water', date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), photoUrl: 'https://placehold.co/100x100.png' },
+        { id: 'l3-1', taskType: 'Water', date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() },
     ],
   },
     {

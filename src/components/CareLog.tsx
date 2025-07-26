@@ -19,6 +19,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 interface CareLogProps {
   plant: Plant;
@@ -79,7 +84,7 @@ export default function CareLog({ plant }: CareLogProps) {
                 <TableHead>Time</TableHead>
                 <TableHead>Task</TableHead>
                 <TableHead>Notes</TableHead>
-                <TableHead>Photo</TableHead>
+                <TableHead className="text-right">Photo</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -88,17 +93,30 @@ export default function CareLog({ plant }: CareLogProps) {
                   <TableCell>{new Date(entry.date).toLocaleDateString()}</TableCell>
                   <TableCell>{new Date(entry.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
                   <TableCell>{entry.taskType}</TableCell>
-                  <TableCell>{entry.notes || '-'}</TableCell>
-                  <TableCell>
+                  <TableCell className="max-w-xs truncate">{entry.notes || '-'}</TableCell>
+                  <TableCell className="text-right">
                     {entry.photoUrl && (
-                      <Image
-                        src={entry.photoUrl}
-                        alt={`Care log for ${plant.name}`}
-                        width={64}
-                        height={64}
-                        className="rounded-md object-cover"
-                        data-ai-hint="plant"
-                      />
+                       <Dialog>
+                        <DialogTrigger asChild>
+                           <Image
+                            src={entry.photoUrl}
+                            alt={`Care log for ${plant.name}`}
+                            width={40}
+                            height={40}
+                            className="rounded-md object-cover cursor-pointer ml-auto"
+                            data-ai-hint="plant"
+                          />
+                        </DialogTrigger>
+                        <DialogContent className="max-w-md">
+                           <Image
+                            src={entry.photoUrl}
+                            alt={`Care log for ${plant.name}`}
+                            width={500}
+                            height={500}
+                            className="rounded-md object-contain"
+                          />
+                        </DialogContent>
+                       </Dialog>
                     )}
                   </TableCell>
                 </TableRow>

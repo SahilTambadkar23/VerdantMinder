@@ -72,7 +72,7 @@ export function usePlants() {
     }));
   }, []);
 
-  const completeCareTask = useCallback((plantId: string, taskId: string, notes?: string) => {
+  const completeCareTask = useCallback((plantId: string, taskId: string, notes?: string, photoUrl?: string | null) => {
     const date = new Date().toISOString();
     const newLogEntryId = `log-${date}`;
     
@@ -86,7 +86,7 @@ export function usePlants() {
           taskType: taskToComplete.type,
           date,
           notes: notes || `Completed '${taskToComplete.type}' task.`,
-          photoUrl: 'https://placehold.co/100x100.png',
+          photoUrl: photoUrl || undefined,
         };
 
         const updatedSchedule = p.schedule.map(t => t.id === taskId ? { ...t, lastCompleted: date } : t);
