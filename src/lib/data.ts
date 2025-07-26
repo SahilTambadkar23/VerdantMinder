@@ -145,5 +145,38 @@ export const initialPlants: Plant[] = [
       { id: 's12-1', type: 'Water', frequencyDays: 9, lastCompleted: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString() }
     ],
     log: []
+  },
+  {
+    id: '13',
+    name: 'Air Plant',
+    type: 'Tillandsia',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'A unique plant that doesn\'t require soil to grow. It absorbs nutrients and water through its leaves.',
+    schedule: [
+      { id: 's13-1', type: 'Water', frequencyDays: 10, lastCompleted: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
+  },
+  {
+    id: '14',
+    name: 'Jade Plant',
+    type: 'Succulent',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'A popular good-luck plant with fleshy, oval-shaped leaves. It is relatively easy to care for and can live for a long time.',
+    schedule: [
+      { id: 's14-1', type: 'Water', frequencyDays: 20, lastCompleted: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
+  },
+  {
+    id: '15',
+    name: 'Areca Palm',
+    type: 'Palm',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'A popular and elegant palm with arching fronds. It helps in purifying the air and is relatively easy to grow indoors.',
+    schedule: [
+      { id: 's15-1', type: 'Water', frequencyDays: 7, lastCompleted: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
   }
 ];
