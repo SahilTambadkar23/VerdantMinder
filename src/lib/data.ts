@@ -123,5 +123,27 @@ export const initialPlants: Plant[] = [
       { id: 's10-1', type: 'Water', frequencyDays: 6, lastCompleted: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString() }
     ],
     log: []
+  },
+  {
+    id: '11',
+    name: 'Succulent Mix',
+    type: 'Succulent',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'A small collection of various succulents in a single pot. Great for sunny windowsills.',
+    schedule: [
+      { id: 's11-1', type: 'Water', frequencyDays: 20, lastCompleted: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
+  },
+  {
+    id: '12',
+    name: 'Orchid',
+    type: 'Flowering',
+    imageUrl: 'https://placehold.co/600x600.png',
+    description: 'Elegant flowering plant that can be tricky to care for but rewards with beautiful blooms. Likes specific orchid potting mix.',
+    schedule: [
+      { id: 's12-1', type: 'Water', frequencyDays: 9, lastCompleted: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString() }
+    ],
+    log: []
   }
 ];
