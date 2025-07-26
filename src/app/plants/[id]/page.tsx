@@ -10,14 +10,15 @@ import { Skeleton } from '@/components/ui/skeleton';
 import CareSchedule from '@/components/CareSchedule';
 import CareLog from '@/components/CareLog';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function PlantDetailPage() {
   const params = useParams();
   const { id } = params;
-  const { getPlantById, isInitialized } = usePlants();
+  const { plants, isInitialized } = usePlants();
 
   const plantId = Array.isArray(id) ? id[0] : id;
-  const plant = getPlantById(plantId);
+  const plant = plants.find(p => p.id === plantId);
 
   if (!isInitialized) {
     return <PlantDetailSkeleton />;
