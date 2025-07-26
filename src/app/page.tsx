@@ -27,6 +27,7 @@ export default function Home() {
 
   return (
     <div>
+      <h1 className="text-3xl font-bold mb-6">Your Plants</h1>
       {plants.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {plants.map((plant) => (
