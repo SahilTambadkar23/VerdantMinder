@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Sprout, PlusCircle, Home } from 'lucide-react';
+import { Sprout, Home } from 'lucide-react';
 import { Button } from './ui/button';
 
 export default function Header() {
@@ -16,12 +16,6 @@ export default function Header() {
               <Link href="/">
                 <Home className="h-5 w-5" />
                 <span className="hidden sm:inline">Home</span>
-              </Link>
-            </Button>
-            <Button asChild variant="ghost" className="gap-2">
-              <Link href="/add-plant">
-                <PlusCircle className="h-5 w-5" />
-                <span className="hidden sm:inline">Add Plant</span>
               </Link>
             </Button>
           </div>
