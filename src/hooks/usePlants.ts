@@ -51,7 +51,7 @@ export function usePlants() {
   }, [plants]);
 
   const updatePlant = useCallback((updatedPlant: Plant) => {
-    setPlants(prevPlants => prevPlants.map(p => p.id === updatedPlant.id ? updatedPlant : p));
+    setPlants(prevPlants => prevPlants.map(p => p.id === updatedPlant.id ? { ...updatedPlant } : p));
   }, []);
 
   const addCareTask = useCallback((plantId: string, task: Omit<CareTask, 'id' | 'lastCompleted'>) => {
@@ -91,6 +91,7 @@ export function usePlants() {
 
         const updatedSchedule = p.schedule.map(t => t.id === taskId ? { ...t, lastCompleted: date } : t);
         
+        // Return a new plant object to ensure re-render
         return {
           ...p,
           schedule: updatedSchedule,
